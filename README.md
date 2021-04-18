@@ -1,5 +1,5 @@
 # Express-Monitor
-
+![](express-monitor.gif)
 Linux istemcilerin anlık ram ve cpu kullanımını gösteren bir uygulama
 
 ## Veriler Nasıl iletiliyor?
