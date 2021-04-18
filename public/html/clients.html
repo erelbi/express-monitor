@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+ 
+    
+   
+     <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <script>
+ 
+         
+            $(document).ready(function() {
+            $('#hostname').DataTable( {
+                "ajax": 'http://localhost:3000/all',
+                method: "GET",
+               
+                 "columns": [
+            { "data": "hostname",
+
+             "mRender": function ( data, type, full ) {
+                     return '<a href="' + window.location+ data +'">'+data+'</a>';
+                   }
+                   
+            }, 
+            ]  
+            });
+            
+                 } );
+    </script>
+    <style>
+    div {
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+    }   
+    </style>
+    <div class="container">
+    <div class="row">
+    <div class="col-10">
+    <table id="hostname" class="display" style="width:100%"></table>
+    </div>
+    </div>
+    </div>
+</body>
+</html>

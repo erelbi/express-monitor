@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+
+</head>
+
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+<body>
+
+     <style>
+    div {
+    padding-top: 10px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    }   
+    </style>
+ 
+
+  <div class="card">
+  <button onclick="goBack()">Client Table</button>
+  <h5 class="card-header">Client Info</h5>
+  <div class="card-body">
+  <div id="ip"></div>
+  <div class="container">
+  
+  
+  <div class="row">
+    
+    <div class="col-6">
+     <div id='CPU'></div>
+    </div>
+    <div class="col-6">
+      <div id='RAM'></div>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<script>
+      var cpu = 0
+      var tram = 0
+      var uram = 0
+      var ip = "0.0.0.0"
+      setInterval(function(){ 
+        
+        
+        $.post(window.location,  function(response) {
+    
+        ip = response.info[0].ip
+        cpu = response.info[0].cpu
+        tram = response.info[0].tram
+        uram = response.info[0].uram
+
+           
+      });
+        var data_Cpu = [
+  {
+    domain: { x: [0, 1], y: [0, 1] },
+    value: cpu,
+    title: { text: "Cpu Usage" },
+    type: "indicator",
+    mode: "gauge+number",
+    delta: { reference: 400 },
+    gauge: { axis: { range: [null, 100] } }
+  }
+];
+      var data_RAM = [
+  {
+    domain: { x: [0, 1], y: [0, 1] },
+    value: uram,
+    title: { text: "RAM Usage" },
+    type: "indicator",
+    mode: "gauge+number",
+    delta: { reference: 400 },
+    gauge: { axis: { range: [null, tram] } }
+  }
+];
+
+var layout = { width: 600, height: 400 };
+Plotly.newPlot('CPU', data_Cpu, layout);
+Plotly.newPlot('RAM', data_RAM, layout);
+document.getElementById('ip').innerHTML = ip;
+       
+        
+        }, 1000);
+   
+          
+           
+              
+           
+  
+     
+  
+ 
+
+  
+</script>
+</div>
+    
+  
+</body>
+</html>
